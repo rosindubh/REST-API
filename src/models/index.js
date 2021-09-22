@@ -6,6 +6,7 @@ const guitarSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true
     },
     model: {
         type: String,
@@ -17,6 +18,6 @@ const guitarSchema = mongoose.Schema({
     },
 });
 
-const Guitar = model.mongoose("Guitar", guitarSchema);
+const Guitar = mongoose.model("Guitar", guitarSchema);
 
 module.exports = Guitar;

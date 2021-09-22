@@ -1,5 +1,7 @@
 //phil welsby - 22 sept 2021 - controllers/index.js file
 
+const Guitar = require("../models");
+
 const obj = [
     {
         name: "response from GET function"
@@ -10,12 +12,16 @@ exports.testGet = (req, res) => {
     res.send(obj);
 }
 
-exports.testPost = (req, res) => {
-    const name = req.body.name;
-    const model = req.body.model;
-    const year = req.body.year
-    res.send({message: `${name} ${model} ${year}`})
+exports.testPost = async (req, res) => {
+    try {
+        const guitar = new Guitar(req.body);
+        await guitar.save();
+        res.status(200).send({ guitar: guitar, message: "Successfully added guitar"});
+    } catch (error) {
+        res.status(500).send({ err: error})
+    }
 }
+
 
 exports.testPut = (req, res) => {
     res.send("response from PUT")
