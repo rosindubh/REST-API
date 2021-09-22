@@ -17,3 +17,14 @@ exports.testPost = (req, res) => {
     res.send({message: `${name} ${model} ${year}`})
 }
 
+exports.testPut = (req, res) => {
+    res.send("response from PUT")
+}
+
+exports.testPatch = (req, res) => {
+    res.send("response from PATCH")
+}
+
+exports.testDelete = (req, res) => {
+    res.send("response from DELETE")
+}
