@@ -2,9 +2,10 @@
 
 const {Router} = require("express");
 const helloRouter = Router();
-const {testObj} = require("../controllers")
+const {testGet, testPost} = require("../controllers")
 
-helloRouter.get("/testObj", testObj);
+helloRouter.get("/guitar", testGet);
+helloRouter.post("/guitar", testPost)
 
 module.exports = helloRouter;
 

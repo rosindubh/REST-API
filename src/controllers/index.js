@@ -2,14 +2,18 @@
 
 const obj = [
     {
-        id: 0,
-        name: 'phil',
-        age: 61,
-
+        name: "response from GET function"
     }
 ];
 
-exports.testObj = (req, res) => {
+exports.testGet = (req, res) => {
     res.send(obj);
+}
+
+exports.testPost = (req, res) => {
+    const name = req.body.name;
+    const model = req.body.model;
+    const year = req.body.year
+    res.send({message: `${name} ${model} ${year}`})
 }
 
