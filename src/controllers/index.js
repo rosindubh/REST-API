@@ -8,11 +8,16 @@ const obj = [
     }
 ];
 
-exports.testGet = (req, res) => {
-    res.send(obj);
+exports.listGuitars = async (req, res) => {
+    try {
+        const list = await Guitar.find({});
+        res.status(200).send({allGuitars: list});
+    } catch (error) {
+        res.status(500).send({ err: error})
+    }
 }
 
-exports.testPost = async (req, res) => {
+exports.addGuitar = async (req, res) => {
     try {
         const guitar = new Guitar(req.body);
         await guitar.save();

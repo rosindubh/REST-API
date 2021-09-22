@@ -2,10 +2,10 @@
 
 const {Router} = require("express");
 const helloRouter = Router();
-const {testGet, testPost, testPut, testPatch, testDelete} = require("../controllers")
+const {listGuitars, addGuitar, testPut, testPatch, testDelete} = require("../controllers")
 
-helloRouter.get("/guitar", testGet);
-helloRouter.post("/guitar", testPost);
+helloRouter.get("/guitar", listGuitars);
+helloRouter.post("/guitar", addGuitar);
 helloRouter.put("/guitar", testPut);
 helloRouter.patch("/guitar", testPatch);
 helloRouter.delete("/guitar", testDelete)

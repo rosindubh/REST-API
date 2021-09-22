@@ -6,11 +6,12 @@ const guitarSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+        unique: false,
     },
     model: {
         type: String,
         required: true,
+        unique: false,
     },
     year: {
         type: String,
