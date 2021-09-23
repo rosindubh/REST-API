@@ -1,6 +1,6 @@
 //phil welsby - 22 sept 2021 - controllers/index.js file
 
-const Guitar = require("../models");
+const Guitar = require("../guitar/guitar.models");
 
 const obj = [
     {
@@ -46,7 +46,6 @@ exports.testPatch = (req, res) => {
 exports.deleteGuitar = async (req, res) => {
     try {
       const name = req.params.name.replaceAll("_", " ")
-      console.log(name)
       await Guitar.deleteOne({ name: name });
       res.status(200).send({ message: `successfully deleted ${name}` });
     } catch (error) {
