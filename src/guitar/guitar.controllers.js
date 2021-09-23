@@ -39,10 +39,6 @@ exports.updateGuitar = async (req, res) => {
     }
   };
 
-exports.testPatch = (req, res) => {
-    res.send("response from PATCH")
-}
-
 exports.deleteGuitar = async (req, res) => {
     try {
       const name = req.params.name.replaceAll("_", " ")
