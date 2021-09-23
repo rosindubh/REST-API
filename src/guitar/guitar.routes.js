@@ -3,9 +3,10 @@
 const {Router} = require("express");
 const helloRouter = Router();
 const {listGuitars, addGuitar, testPatch, deleteGuitar, updateGuitar} = require("../guitar/guitar.controllers")
+const {testMiddle} = require("../middleware")
 
 helloRouter.get("/guitar", listGuitars);
-helloRouter.post("/guitar", addGuitar);
+helloRouter.post("/guitar", testMiddle, addGuitar);
 helloRouter.put("/guitar", updateGuitar);
 helloRouter.patch("/guitar", updateGuitar);
 helloRouter.delete("/guitar/:name", deleteGuitar)
