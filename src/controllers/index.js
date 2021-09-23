@@ -27,10 +27,17 @@ exports.addGuitar = async (req, res) => {
     }
 }
 
-
-exports.testPut = (req, res) => {
-    res.send("response from PUT")
-}
+exports.updateGuitar = async (req, res) => {
+    try {
+      await Guitar.updateOne(
+        { name: req.body.filter },
+        { $set: { year: req.body.update } }
+      );
+      res.status(200).send({ message: "Successfully updated" });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
 
 exports.testPatch = (req, res) => {
     res.send("response from PATCH")
