@@ -36,6 +36,13 @@ exports.testPatch = (req, res) => {
     res.send("response from PATCH")
 }
 
-exports.testDelete = (req, res) => {
-    res.send("response from DELETE")
-}
+exports.deleteGuitar = async (req, res) => {
+    try {
+      const name = req.params.name.replaceAll("_", " ")
+      console.log(name)
+      await Guitar.deleteOne({ name: name });
+      res.status(200).send({ message: `successfully deleted ${name}` });
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
