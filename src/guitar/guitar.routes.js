@@ -1,4 +1,4 @@
-//phil welsby - 22 sept 2021 - routes/index.js file
+//phil welsby - 22 sept 2021 - guitar.routes.js
 
 const {Router} = require("express");
 const helloRouter = Router();

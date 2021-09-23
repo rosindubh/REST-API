@@ -1,4 +1,4 @@
-//phil welsby - 22 sept 2021 - models/index.js
+//phil welsby - 22 sept 2021 - guitar.models.js
 
 const mongoose = require("mongoose");
 

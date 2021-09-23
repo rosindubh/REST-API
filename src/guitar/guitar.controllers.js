@@ -1,4 +1,4 @@
-//phil welsby - 22 sept 2021 - controllers/index.js file
+//phil welsby - 22 sept 2021 - guitar.controllers.js
 
 const Guitar = require("../guitar/guitar.models");
 
