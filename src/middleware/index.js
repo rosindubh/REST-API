@@ -42,6 +42,6 @@ exports.decryptPassword = async (req, res, next) => {
           throw new Error
         }
     } catch (error) {
-        res.status(501).send(`password or email does not match, user may not exist ${error}`);
+        res.status(400).send(`password or email does not match, user may not exist ${error}`);
     }
 }
