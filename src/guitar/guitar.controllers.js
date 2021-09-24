@@ -2,11 +2,7 @@
 
 const {Guitar, User} = require("../guitar/guitar.models");
 
-const obj = [
-    {
-        name: "response from GET function"
-    }
-];
+
 
 exports.listGuitars = async (req, res) => {
     try {
@@ -34,7 +30,7 @@ exports.updateGuitar = async (req, res) => {
         { name: req.body.filter },
         { $set: { year: req.body.update } }
       );
-      res.status(200).send({ message: "Successfully updated" });
+      res.status(200).send({ message: `Successfully updated ${req.body.filter} to year ${req.body.update}` });
     } catch (error) {
       res.status(500).send(error);
     }
