@@ -46,6 +46,15 @@ exports.deleteGuitar = async (req, res) => {
     }
   };
 
+  exports.listUsers = async (req, res) => {
+    try {
+        const list = await User.find({});
+        res.status(200).send({allUsers: list});
+    } catch (error) {
+        res.status(500).send({ err: error})
+    }
+}
+
   exports.addUser = async (req, res) => {
     try {
       const user = new User(req.body);
