@@ -28,7 +28,7 @@ exports.updateGuitar = async (req, res) => {
     try {
       await Guitar.updateOne(
         { name: req.body.filter },
-        { $set: { year: req.body.update } }
+        { $set: { year: req.body.update } }//NOTE: Don't understand $set in this line of code (Ask Andy)
       );
       res.status(200).send({ message: `Successfully updated ${req.body.filter} to year ${req.body.update}` });
     } catch (error) {
