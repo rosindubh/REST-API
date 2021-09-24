@@ -64,3 +64,12 @@ exports.deleteGuitar = async (req, res) => {
       res.status(500).send(error);
     }
   }
+
+  exports.findUser = async (req, res) => {
+    try {
+      res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+  
