@@ -13,6 +13,6 @@ app.use(helloRouter)
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-    console.log(`Listening on port ${port}...`);
+    console.log(`Server listening on port ${port}...`);
 });
 
