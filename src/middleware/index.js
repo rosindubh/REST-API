@@ -21,7 +21,7 @@ exports.hashPassword = async (req, res, next) => {
         req.body.password = hashedPassword
         next()
     } catch (error) {
-        res.status(500).send(error);
+        res.status(501).send(error);
         
     }
 }
