@@ -1,5 +1,6 @@
 //phil welsby - 22 sept 2021 - guitar.controllers.js
 
+const bcrypt = require("bcryptjs/dist/bcrypt");
 const {Guitar, User} = require("../guitar/guitar.models");
 
 
@@ -46,13 +47,13 @@ exports.deleteGuitar = async (req, res) => {
   };
 
   //POST     /user/login
-  exports.findUser = async (req, res) => {
-    try {
-      res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  }
+  // exports.findUser = async (req, res) => {
+  //   try {
+  //     res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //   }
+  // }
 
   //GET      /user
   exports.listUsers = async (req, res) => {
@@ -69,11 +70,13 @@ exports.deleteGuitar = async (req, res) => {
     try {
       const user = new User(req.body);
       await user.save();
-      res.status(200).send(user)
+      res.status(200).send({ user, token: req.token, message: "User added success"});
     } catch (error) {
       res.status(500).send(error);
     }
   }
+
+
 
   ///PUT       /user/update
   exports.updateUser = async (req, res) => {
@@ -100,6 +103,19 @@ exports.deleteGuitar = async (req, res) => {
     }
   }
 
+  //POST     /user/login
+  exports.login = async (req, res) => {
+    try {
+      const user = await User.findOne({ email: req.body.email });
+      if (await bcrypt.compare(req.body.pass, user.pass)) {
+        res.status(200).send({ user, token: req.token, message: "Login successful"});
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
   // //DELETE         /user/[user email]
   // exports.deleteUser = async (req, res) => {
   //   try {

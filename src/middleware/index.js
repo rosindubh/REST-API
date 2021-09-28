@@ -1,7 +1,8 @@
 //phil welsby - 23 sept 2021 - middleware/index.js
 
-const bcrypt = require("bcryptjs")
-const {User} = require("../guitar/guitar.models")
+const bcrypt = require("bcryptjs");
+const jwt = require('jsonwebtoken');
+const {User} = require("../guitar/guitar.models");
 
 //test function
 exports.testMiddle = (req, res, next) => {
@@ -14,7 +15,7 @@ exports.testMiddle = (req, res, next) => {
     }
 }
 
-//function to encrypt a users password and retun a respomse
+//function to encrypt a users password and retun a respomse/this edit was done by Andy CodeNation
 exports.hashPassword = async (req, res, next) => {
     try {
       if (req.body.key) {
@@ -67,5 +68,15 @@ exports.decryptPassword = async (req, res, next) => {
         }
     } catch (error) {
         res.status(400).send(`password or email does not match, user may not exist ${error}`);
+    }
+}
+
+exports.createToken = async (req, res, next) => {
+    try {
+        const token = jwt.sign({email: req.body.email}, process.env.SECRET);
+        req.token = token
+        next();
+    } catch (error) {
+        res.status(500).send(error);
     }
 }
