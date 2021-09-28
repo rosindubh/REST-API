@@ -80,7 +80,7 @@ exports.deleteGuitar = async (req, res) => {
     try {
       await User.updateOne(
         { email: req.body.email},
-        // {$set: {[req.body.key]: req.body.update } }
+        // {$set: {[req.body.key]: req.body.update } }  THIS DIDN'T WORK???? ASK ANDY
         {$set: { password: req.body.password} }
       );
       res.status(200).send({ message: "Successfully Updated..."})
@@ -89,24 +89,25 @@ exports.deleteGuitar = async (req, res) => {
     }
   }
 
-  // //DELETE      /user/[user email]
-  // exports.deleteUser = async (req, res) => {
-  //   try {
-  //     await User.deleteOne({email: req.params.email});
-  //     res.status(200).send({message: `${email} deleted`})
-  //   } catch (error) {
-  //     res.status(500).send(error);
-  //   }
-  // }
-
-  //DELETE         /user/[user email]
+  //DELETE      /user/[user email]
   exports.deleteUser = async (req, res) => {
     try {
-      const email = req.params.email.replaceAll("_", " ")//replace all underscores in address bar with a space
-      await User.deleteOne({ email: req.params.email });
-      res.status(200).send({ message: `successfully deleted ${email}` });
+      const email = req.params.email //THIS LINE MISSING IN VIDEO???
+      await User.deleteOne({email: req.params.email});
+      res.status(200).send({message: `${email} deleted`})
     } catch (error) {
-      res.status(501).send(error);
+      res.status(500).send(error);
     }
-  };
+  }
+
+  // //DELETE         /user/[user email]
+  // exports.deleteUser = async (req, res) => {
+  //   try {
+  //     const email = req.params.email.replaceAll("_", " ")//replace all underscores in address bar with a space
+  //     await User.deleteOne({ email: req.params.email });
+  //     res.status(200).send({ message: `successfully deleted ${email}` });
+  //   } catch (error) {
+  //     res.status(501).send(error);
+  //   }
+  // };
   
