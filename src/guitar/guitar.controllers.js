@@ -80,8 +80,8 @@ exports.deleteGuitar = async (req, res) => {
     try {
       await User.updateOne(
         { email: req.body.email},
-        // {$set: {[req.body.key]: req.body.update } }  THIS DIDN'T WORK???? ASK ANDY
-        {$set: { password: req.body.password} }
+        {$set: {[req.body.key]: req.body.update } }  //THIS DIDN'T WORK???? ASK ANDY
+        // {$set: { password: req.body.password} }
       );
       res.status(200).send({ message: "Successfully Updated..."})
     } catch (error) {

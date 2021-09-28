@@ -17,9 +17,17 @@ exports.testMiddle = (req, res, next) => {
 //function to encrypt a users password and retun a respomse
 exports.hashPassword = async (req, res, next) => {
     try {
-        const hashedPassword = await bcrypt.hash(req.body.password, 8);
-        req.body.password = hashedPassword
-        next()
+        if(req.body.key && req.body.key === 'password') {
+            const password = req.body.update;
+            const hashedPassword = await bcrypt.hash(password, 8);
+            req.body.update = hashedPassword;
+            next();
+        } else if (req.body.password) {
+            const hashedPassword = await bcrypt.hash(req.body.password, 8);
+            req.body.password = hashedPassword
+            next()
+        }
+            next();
     } catch (error) {
         res.status(501).send(error);
         
