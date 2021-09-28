@@ -56,14 +56,14 @@ exports.deleteGuitar = async (req, res) => {
   // }
 
   //GET      /user
-  exports.listUsers = async (req, res) => {
-    try {
-        const list = await User.find({});
-        res.status(200).send({allUsers: list});
-    } catch (error) {
-        res.status(500).send({ err: error})
-    }
-}
+//   exports.listUsers = async (req, res) => {
+//     try {
+//         const list = await User.find({});
+//         res.status(200).send({allUsers: list});
+//     } catch (error) {
+//         res.status(500).send({ err: error})
+//     }
+// }
 
   //POST      /user
   exports.addUser = async (req, res) => {
@@ -113,7 +113,16 @@ exports.deleteGuitar = async (req, res) => {
         throw new Error();
       }
     } catch (error) {
-      res.status(500).send(error);
+      res.status(501).send(error);
+    }
+  }
+
+  //GET      /user
+  exports.tokenLogin = (req, res) => {
+    try {
+      res.status(200).send(req.user) //NOTE: req.user came from decodeToken in middleware
+    } catch (error) {
+      res.status(500).send(error)
     }
   }
   // //DELETE         /user/[user email]
