@@ -3,7 +3,6 @@
 const {Guitar, User} = require("../guitar/guitar.models");
 
 
-
 exports.listGuitars = async (req, res) => {
     try {
         const list = await Guitar.find({});
@@ -46,6 +45,16 @@ exports.deleteGuitar = async (req, res) => {
     }
   };
 
+  //POST     /user/login
+  exports.findUser = async (req, res) => {
+    try {
+      res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  }
+
+  //GET      /user
   exports.listUsers = async (req, res) => {
     try {
         const list = await User.find({});
@@ -55,6 +64,7 @@ exports.deleteGuitar = async (req, res) => {
     }
 }
 
+  //POST      /user
   exports.addUser = async (req, res) => {
     try {
       const user = new User(req.body);
@@ -65,11 +75,38 @@ exports.deleteGuitar = async (req, res) => {
     }
   }
 
-  exports.findUser = async (req, res) => {
+  ///PUT       /user/update
+  exports.updateUser = async (req, res) => {
     try {
-      res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
+      await User.updateOne(
+        { email: req.body.email},
+        // {$set: {[req.body.key]: req.body.update } }
+        {$set: { password: req.body.password} }
+      );
+      res.status(200).send({ message: "Successfully Updated..."})
     } catch (error) {
       res.status(500).send(error);
     }
   }
+
+  // //DELETE      /user/[user email]
+  // exports.deleteUser = async (req, res) => {
+  //   try {
+  //     await User.deleteOne({email: req.params.email});
+  //     res.status(200).send({message: `${email} deleted`})
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //   }
+  // }
+
+  //DELETE         /user/[user email]
+  exports.deleteUser = async (req, res) => {
+    try {
+      const email = req.params.email.replaceAll("_", " ")//replace all underscores in address bar with a space
+      await User.deleteOne({ email: req.params.email });
+      res.status(200).send({ message: `successfully deleted ${email}` });
+    } catch (error) {
+      res.status(501).send(error);
+    }
+  };
   
