@@ -14,8 +14,8 @@ helloRouter.delete("/guitar/:name", deleteGuitar)
 helloRouter.get("/user", decodeToken, tokenLogin)
 helloRouter.get("/user/list", listUsers)
 helloRouter.post("/user", hashPassword, createToken, addUser);
-// helloRouter.post("/user/login", decryptPassword, createToken, login);
-helloRouter.post("/user/login", login);
+helloRouter.post("/user/login", decryptPassword, createToken, login);
+// helloRouter.post("/user/login", login);
 helloRouter.put("/user/update", hashPassword, updateUser)
 helloRouter.delete("/user/:email", deleteUser)
 
