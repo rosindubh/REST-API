@@ -118,7 +118,9 @@ exports.deleteGuitar = async (req, res) => {
   //   }
   // }
 
+  // POST       /user/login
   exports.login = async (req, res) => {
+    
     try {
         const user = await User.findOne({ email: req.body.email });
         if (await bcrypt.compare(req.body.password, user.password)) {
@@ -127,9 +129,27 @@ exports.deleteGuitar = async (req, res) => {
             throw new Error();
         }
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({error, MESSAGE: "AN ERROR HAS OCCURED IN login BACKEND - CHECK USERNAME AND PASSWORD"});
     }
 };
+
+// POST       /user/login
+// exports.login = async (req, res) => {
+//   try {
+//     if(req.user) {
+//       res.status(200).send(req.user);
+//     } else {
+//       const user = await User.findOne({ email: req.body.email });
+//       if (await bcrypt.compare(req.body.pass, user.password)) {
+//         res.status(200).send({ user, message: 'Login successful...'})
+//       } else {
+//         throw new error
+//       }
+//     }
+//   } catch (error) {
+//     res.status(500).send(error)
+//   }
+// }
 
   //GET      /user
   exports.tokenLogin = (req, res) => {
