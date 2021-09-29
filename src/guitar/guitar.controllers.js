@@ -113,7 +113,7 @@ exports.deleteGuitar = async (req, res) => {
         throw new Error();
       }
     } catch (error) {
-      res.status(501).send(error);
+      res.status(500).send(error);
     }
   }
 
