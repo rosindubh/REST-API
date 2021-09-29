@@ -82,13 +82,17 @@ exports.createToken = (req, res, next) => {
 }
 
 exports.decodeToken = async (req, res, next) => {
+  if(req.header("Authorization")) {
     try {
-        const token = req.header("Authorization").replace("Bearer ", "")
-        const decodeToken = jwt.verify(token, process.env.SECRET)
-        const user = await User.findOne({email: decodeToken.email});
-        req.user = user;
-        next();
-    } catch (error) {
-        res.status(500).send(error);
-    }
+      const token = req.header("Authorization").replace("Bearer ", "")
+      const decodeToken = jwt.verify(token, process.env.SECRET)
+      const user = await User.findOne({email: decodeToken.email});
+      req.user = user;
+      next();
+  } catch (error) {
+      res.status(500).send(error);
+  }
+  } else {
+    next()
+  }
 }
