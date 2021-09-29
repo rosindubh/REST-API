@@ -2,7 +2,7 @@
 
 const {Router} = require("express");
 const helloRouter = Router();
-const {listGuitars, addGuitar, deleteGuitar, updateGuitar, addUser, updateUser, deleteUser, login, tokenLogin} = require("../guitar/guitar.controllers")
+const {listGuitars, addGuitar, deleteGuitar, updateGuitar, listUsers, addUser, updateUser, deleteUser, login, tokenLogin} = require("../guitar/guitar.controllers")
 const {testMiddle, hashPassword, decryptPassword, createToken, decodeToken} = require("../middleware")
 
 helloRouter.get("/guitar", listGuitars);
@@ -12,7 +12,7 @@ helloRouter.patch("/guitar", updateGuitar);
 helloRouter.delete("/guitar/:name", deleteGuitar)
 
 helloRouter.get("/user", decodeToken, tokenLogin)
-// helloRouter.get("/user", listUsers)
+helloRouter.get("/user/list", listUsers)
 helloRouter.post("/user", hashPassword, createToken, addUser);
 helloRouter.post("/user/login", decryptPassword, createToken, login);
 helloRouter.put("/user/update", hashPassword, updateUser)

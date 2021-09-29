@@ -55,15 +55,15 @@ exports.deleteGuitar = async (req, res) => {
   //   }
   // }
 
-  //GET      /user
-//   exports.listUsers = async (req, res) => {
-//     try {
-//         const list = await User.find({});
-//         res.status(200).send({allUsers: list});
-//     } catch (error) {
-//         res.status(500).send({ err: error})
-//     }
-// }
+  //GET      /user/list
+  exports.listUsers = async (req, res) => {
+    try {
+        const list = await User.find({});
+        res.status(200).send({allUsers: list});
+    } catch (error) {
+        res.status(500).send({ err: error})
+    }
+}
 
   //POST      /user
   exports.addUser = async (req, res) => {
