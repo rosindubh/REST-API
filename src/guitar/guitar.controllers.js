@@ -46,15 +46,6 @@ exports.deleteGuitar = async (req, res) => {
     }
   };
 
-  //POST     /user/login
-  // exports.findUser = async (req, res) => {
-  //   try {
-  //     res.status(200).send(req.user) //NOTE: req.user CAME FROM decryptPassword IN middleware FILE
-  //   } catch (error) {
-  //     res.status(500).send(error);
-  //   }
-  // }
-
   //GET      /user/list
   exports.listUsers = async (req, res) => {
     try {
@@ -75,8 +66,6 @@ exports.deleteGuitar = async (req, res) => {
       res.status(500).send(error);
     }
   }
-
-
 
   ///PUT       /user/update
   exports.updateUser = async (req, res) => {
@@ -103,21 +92,6 @@ exports.deleteGuitar = async (req, res) => {
     }
   }
 
-  //POST     /user/login
-  // exports.login = async (req, res) => {
-  //   try {
-  //     const user = await User.findOne({ email: req.body.email });
-  //     console.log(user)
-  //     if (await bcrypt.compare(req.body.pass, user.password)) {
-  //       res.status(200).send({ user, email, message: "Login successful"});
-  //     } else {
-  //       throw new Error();
-  //     }
-  //   } catch (error) {
-  //     res.status(500).send({error, message: 'an error has occured...'});
-  //   }
-  // }
-
   // POST       /user/login
   exports.login = async (req, res) => {
     
@@ -125,6 +99,7 @@ exports.deleteGuitar = async (req, res) => {
         const user = await User.findOne({ email: req.body.email });
         if (await bcrypt.compare(req.body.password, user.password)) {
             res.status(200).send({ user, message: "Log In Successful" });
+            console.log(`${user.name} has logged in`) //output to terminal
         } else {
             throw new Error();
         }
@@ -132,24 +107,6 @@ exports.deleteGuitar = async (req, res) => {
         res.status(500).send({error, MESSAGE: "AN ERROR HAS OCCURED IN login BACKEND - CHECK USERNAME AND PASSWORD"});
     }
 };
-
-// POST       /user/login
-// exports.login = async (req, res) => {
-//   try {
-//     if(req.user) {
-//       res.status(200).send(req.user);
-//     } else {
-//       const user = await User.findOne({ email: req.body.email });
-//       if (await bcrypt.compare(req.body.pass, user.password)) {
-//         res.status(200).send({ user, message: 'Login successful...'})
-//       } else {
-//         throw new error
-//       }
-//     }
-//   } catch (error) {
-//     res.status(500).send(error)
-//   }
-// }
 
   //GET      /user
   exports.tokenLogin = (req, res) => {
@@ -159,14 +116,5 @@ exports.deleteGuitar = async (req, res) => {
       res.status(500).send(error)
     }
   }
-  // //DELETE         /user/[user email]
-  // exports.deleteUser = async (req, res) => {
-  //   try {
-  //     const email = req.params.email.replaceAll("_", " ")//replace all underscores in address bar with a space
-  //     await User.deleteOne({ email: req.params.email });
-  //     res.status(200).send({ message: `successfully deleted ${email}` });
-  //   } catch (error) {
-  //     res.status(501).send(error);
-  //   }
-  // };
+
   

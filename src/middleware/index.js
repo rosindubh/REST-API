@@ -32,25 +32,6 @@ exports.hashPassword = async (req, res, next) => {
       res.status(501).send(error);
     }
   };
-// exports.hashPassword = async (req, res, next) => {
-//     try {
-//         if(req.body.key && req.body.key === 'password') {
-//             const password = req.body.update;
-//             const hashedPassword = await bcrypt.hash(password, 8);
-//             req.body.update = hashedPassword;
-//             next();
-//         } else if (req.body.password) {
-//             const hashedPassword = await bcrypt.hash(req.body.password, 8);
-//             req.body.password = hashedPassword
-//             next()
-//         }
-//             next();
-//     } catch (error) {
-//         res.status(501).send(error);
-        
-//     }
-// }
-
 
 //function to de-crypt a users password and return a reponse
 exports.decryptPassword = async (req, res, next) => {
@@ -71,6 +52,7 @@ exports.decryptPassword = async (req, res, next) => {
     }
 }
 
+//function to create a token
 exports.createToken = (req, res, next) => {
     try {
         const token = jwt.sign({email: req.body.email}, process.env.SECRET);
@@ -81,6 +63,7 @@ exports.createToken = (req, res, next) => {
     }
 }
 
+//function to check/decode a token
 exports.decodeToken = async (req, res, next) => {
   if(req.header("Authorization")) {
     try {
