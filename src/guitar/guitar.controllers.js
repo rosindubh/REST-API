@@ -3,7 +3,6 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const {Guitar, User} = require("../guitar/guitar.models");
 
-
 exports.listGuitars = async (req, res) => {
     try {
         const list = await Guitar.find({});
@@ -94,7 +93,6 @@ exports.deleteGuitar = async (req, res) => {
 
   // POST       /user/login
   exports.login = async (req, res) => {
-    
     try {
         const user = await User.findOne({ email: req.body.email });
         if (await bcrypt.compare(req.body.password, user.password)) {
